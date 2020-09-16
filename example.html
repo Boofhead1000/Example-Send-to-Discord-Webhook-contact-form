@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <body>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <h2>
+    <form>
+      <label for="fname">User with tag:</label><br />
+      <input
+        type="text"
+        id="fname"
+        name="fname"
+        placeholder="Exampleuser#0000"
+        maxlength="40"
+      /><br />
+      <label for="lname">User ID:</label><br />
+      <input
+        type="text"
+        id="lname"
+        name="lname"
+        placeholder="123456789907"
+        maxlength="30"
+      /><br />
+      <label for="issue">Reason for Contacting Us</label><br />
+      <textarea
+        type="text"
+        id="issue"
+        name="issue"
+        style="height:100px; width:400px;"
+        placeholder="Reason for Contacting us (Max 500)"
+        maxlength="500"
+      ></textarea>
+      <p id="notice" class="alert"></p>
+      <p id="notice2" class="alert2"></p>
+      <button onclick="sendMessage()">Submit</button>
+    </form>
+
+    <script>
+      function sendMessage() {
+        var request = new XMLHttpRequest();
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var issue = document.getElementById("issue").value;
+
+        if (fname !== "" && lname !== "" && issue !== "") {
+          document.getElementById("fname").value = "";
+          document.getElementById("lname").value = "";
+          document.getElementById("issue").value = "";
+
+          request.open(
+            "POST",
+            "https://discordapp.com/api/webhooks/699130211374989343/oRmKH01hs1bPJCweQdl2iSBI9xIuamPmZfnE9Q2lgRw3CnSBtB5J6o7aUKeCgdsj5YrA"
+          );
+
+          request.setRequestHeader("Content-type", "application/json");
+
+          var params = {
+            username: "Contact us Submisstions ",
+            content:
+              "**A User Has Submitted a form on Boofboat Studios**\n**User Tag:** " +
+              fname +
+              "\n**ID:** " +
+              lname +
+              "\n**Submission:** " +
+              issue //test it now, i removed the value in this line it should work| Thanks
+          };
+
+          request.send(JSON.stringify(params));
+document.getElementById("notice2").innerHTML =
+                    "Thanks for providing Feedback! Your Feedback has been Recorded\nNo Personal Infomation Has been Tracked";
+                    document.getElementById("notice").value = "";
+          event.preventDefault();
+        } else {
+          event.preventDefault();
+      document.getElementById("notice").innerHTML =
+                    "All the Boxes Need to Be Filled In to Continue";//change this to whatever you want to use
+        }
+      }
+    </script>
+      </h2>
+                </button>
+            </div>
+          </body>
+        </head>
+      </html>
+    </body>
+  </head>
+</html>
